@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 from MyWebDriver import MyWebDriver
 from utils.SleepTime import SleepTime
 from domain.Hitter import Hitter
+from selenium.common.exceptions import NoSuchElementException
 
 class HitterCrawler(MyWebDriver):
     def __init__(self, driver: webdriver.Chrome, url: str) -> None:
@@ -44,14 +45,17 @@ class HitterCrawler(MyWebDriver):
         return hitters
 
     def get_page_count(self) -> int:
-        self.clickBtn(By.ID, 'cphContents_cphContents_cphContents_ucPager_btnLast')
-        
-        page_btns = self._driver.find_elements(By.CSS_SELECTOR, '#cphContents_cphContents_cphContents_udpContent > div.record_result > div > a')
-        count = int(page_btns[-2].text)
-        
-        self.clickBtn(By.ID, 'cphContents_cphContents_cphContents_ucPager_btnFirst')
+        try:
+            self.clickBtn(By.ID, 'cphContents_cphContents_cphContents_ucPager_btnLast')
+            
+            page_btns = self._driver.find_elements(By.CSS_SELECTOR, '#cphContents_cphContents_cphContents_udpContent > div.record_result > div > a')
+            count = int(page_btns[-2].text)
+            
+            self.clickBtn(By.ID, 'cphContents_cphContents_cphContents_ucPager_btnFirst')
 
-        return count
+            return count
+        except NoSuchElementException:
+            return 1
 
     def crawl_hitter_info(self) -> list[Hitter]:
         rows = self._driver.find_elements(By.CSS_SELECTOR, '#cphContents_cphContents_cphContents_udpContent > div.record_result > table > tbody > tr')
