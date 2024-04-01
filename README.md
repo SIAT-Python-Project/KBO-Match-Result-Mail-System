@@ -32,6 +32,8 @@ KBO 경기 결과를 메일로 알려주는 프로젝트 입니다.
   - utils
     - SleepTime.py
   - fileIO
+  - domain
+      - 데이터 들어갈 Class들 ex) Employee
   - main.py
 
 ## 사용 언어
