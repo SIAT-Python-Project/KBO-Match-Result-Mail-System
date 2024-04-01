@@ -17,12 +17,22 @@ KBO 경기 결과를 메일로 알려주는 프로젝트 입니다.
 
 
 ### 폴더
-crawling: Y_Game, T_Game, Inning_info, News, Team_score, Player_score 각자 크롤링
-main.py
-.env: 
-util: time 
-fileIO
-
+- .env 
+- src
+  - webdriver
+    - crawling
+        - Y_Game
+        - T_Game
+        - Inning_info
+        - News
+        - Team_score
+        - Player_score
+        - ...
+    - MyWebDriver.py
+  - utils
+    - SleepTime.py
+  - fileIO
+  - main.py
 
 ## 사용 언어
 - Python: 3.11.8
