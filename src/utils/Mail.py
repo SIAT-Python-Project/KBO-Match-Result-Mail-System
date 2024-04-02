@@ -25,7 +25,6 @@ class Mail:
         try:
             smtp = smtplib.SMTP_SSL(self.SMTP_SERVER, self.SMTP_PORT)
             smtp.login(self.__email, self.__passwd)
-            smtp.sendmail(self.__email, self.__email, msg.as_string())
             smtp.close()
         except Exception:
             raise Exception('메일 정보가 올바르지 않습니다.')
