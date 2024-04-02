@@ -62,14 +62,19 @@ def inputTeamResult():
     print('받고 싶은 정보를 ,기준으로 입력해주세요.')
     print('ex) 1,2')
 
-    results = set(input('>>>').split(','))
+    team_input = input('>>>')
+
+    results = set(team_input.split(','))
+
+    if team_input == '':
+        results = set()
 
     try:
         team_results = []
 
         for result in results:
             if result not in team_result_info:
-                raise Exception('올바른 팀 이름을 입력해주세요')
+                raise Exception('올바른 숫자 형식을 입력해주세요')
 
             team_results.append(team_result_info[result])
 
@@ -87,14 +92,19 @@ def inputRanking():
     print('받고 싶은 정보를 ,기준으로 입력해주세요.')
     print('ex) 1,2')
 
-    results = set(input('>>>').split(','))
+    ranking_input = input('>>>')
+
+    results = set(ranking_input.split(','))
+
+    if ranking_input == '':
+        results = set()
 
     try:
         rank_results = []
 
         for result in results:
             if result not in rank_info:
-                raise Exception('올바른 팀 이름을 입력해주세요')
+                raise Exception('올바른 숫자 형식을 입력해주세요')
 
             rank_results.append(rank_info[result])
 
