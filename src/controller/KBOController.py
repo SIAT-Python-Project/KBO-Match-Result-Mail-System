@@ -1,5 +1,6 @@
 from utils.Mail import Mail
 from controller.PlayerController import PlayerController
+from utils.HTMLChanger import to_HTML
 
 class KBOController:
     def __init__(self, settings) -> None:
@@ -20,38 +21,19 @@ class KBOController:
         for rank in self.__settings['rank']:
             data['ranking_info'][rank] = self.select_rank(rank)
 
-        return self.to_HTML(data)
+        return to_HTML(data)
 
     def select_result(self, result_type: str) -> list[object]:
-        if result_type == 'yester_info':
-            return 
-        if result_type == 'today_info':
-            return 
-        if result_type == 'yesterday_news':
-            return
+        if result_type == 'recent_match_info':
+            return []
+        if result_type == 'today_match_info':
+            return []
+        if result_type == 'recent_match_news':
+            return []
 
     def select_rank(self, rank_type: str) -> list[object]:
         if rank_type == 'team_rank':
-            return 
+            return []
         if rank_type == 'players_rank':
             return PlayerController.get_ranking_players()
         
-
-    def to_HTML(self, data):
-        pass
-
-    def to_HTML_team_info(self, data):
-        pass
-
-    def to_HTML_recent_match(self, data):
-        pass
-
-    def to_HTML_today_match(self, data):
-        pass
-
-    def to_HTML_recent_match_news(self, data):
-        pass
-        
-        
-        
-
