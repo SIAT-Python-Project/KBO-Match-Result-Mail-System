@@ -28,3 +28,20 @@ class Mail:
             smtp.close()
         except Exception:
             raise Exception('메일 정보가 올바르지 않습니다.')
+        
+    def send(self, html):
+        msg = MIMEMultipart('mixed') 
+        msg['From'] = self.__email
+        msg['To'] = self.__email
+        msg['Subject'] = '야구!'
+
+        msg_html = MIMEText(html, 'html', _charset='UTF-8')
+        msg.attach(msg_html)
+
+        smtp = smtplib.SMTP_SSL(self.SMTP_SERVER, self.SMTP_PORT)
+        smtp.login(self.__email, self.__passwd)
+        smtp.sendmail(self.__email, self.__email, msg.as_string())
+        smtp.close()
+
+
+
