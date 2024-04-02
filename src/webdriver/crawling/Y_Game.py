@@ -34,7 +34,7 @@ class GameResultsScraper(Scraper):
 
         return game_results
 
-    def scrape_and_save(self, file_name_prefix):
+    def run(self, file_name_prefix='경기기록'):
         game_results = self.scrape_data()
         
         game_date = game_results[0][0]
@@ -42,9 +42,14 @@ class GameResultsScraper(Scraper):
         full_game_date = f'{game_year}.{game_date}'
         
         df_games = pd.DataFrame(game_results, columns=['Date', 'Team 1', 'Score 1', 'Score 2', 'Team 2'])
-        file_path = f'{full_game_date}_{file_name_prefix}.xlsx'
+        folder_name = 'end_game'
+        file_name = f'{full_game_date}_{file_name_prefix}.xlsx'
+        file_path = os.path.join(os.getcwd(), folder_name, file_name)
         
         try:
+            if not os.path.exists(os.path.join(os.getcwd(), folder_name)):
+                os.makedirs(os.path.join(os.getcwd(), folder_name))
+
             if os.path.exists(file_path):
                 raise FileExistsError(f"파일 '{file_path}'은(는) 이미 존재합니다.")
 
