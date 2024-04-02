@@ -1,7 +1,7 @@
 from utils.Mail import Mail
 
 kbo_teams = ['NC', 'SSG', '롯데', '삼성', '키움', '두산', 'LG', '한화', 'KT', 'KIA']
-team_result_info = {'1': 'yester_info', '2': 'today_info', '3': 'yesterday_news'}
+team_result_info = {'1': 'recent_match_info', '2': 'today_match_info', '3': 'recent_match_news'}
 rank_info = {'1': 'team_rank', '2': 'players_rank'}
 
 
@@ -26,7 +26,7 @@ def inputMail():
         mail.send_test()
         return {"email": email, "passwd": passwd}
     except Exception as e:
-        print('[ERROR] ' + e.__str__)
+        print(f'[ERROR] {e}')
         return inputMail()
 
 def inputTeam():
@@ -51,14 +51,14 @@ def inputTeamName():
             
         return list(teams)
     except Exception as e:
-        print('[ERROR] ' + e.__str__)
+        print(f'[ERROR] {e}')
         return inputTeamName()
     
 def inputTeamResult():
     print('------------------------------')
     print('1. 최근 경기 기록 및 박스 스코어')
     print('2. 오늘 경기 일정')
-    print('3. 전날 경기 뉴스')
+    print('3. 최근 경기 뉴스')
     print('받고 싶은 정보를 ,기준으로 입력해주세요.')
     print('ex) 1,2')
 
@@ -76,7 +76,7 @@ def inputTeamResult():
         return team_results
 
     except Exception as e:
-        print('[ERROR] ' + e.__str__)
+        print(f'[ERROR] {e}')
         return inputTeamResult()
     
 
@@ -101,5 +101,5 @@ def inputRanking():
         return rank_results
 
     except Exception as e:
-        print('[ERROR] ' + e.__str__)
+        print(f'[ERROR] {e}')
         return inputRanking()
