@@ -26,7 +26,7 @@ def inputMail():
         mail.send_test()
         return {"email": email, "passwd": passwd}
     except Exception as e:
-        print('[ERROR] ' + e)
+        print('[ERROR] ' + e.__str__)
         return inputMail()
 
 def inputTeam():
@@ -51,7 +51,7 @@ def inputTeamName():
             
         return list(teams)
     except Exception as e:
-        print('[ERROR] ' + e)
+        print('[ERROR] ' + e.__str__)
         return inputTeamName()
     
 def inputTeamResult():
@@ -76,7 +76,7 @@ def inputTeamResult():
         return team_results
 
     except Exception as e:
-        print('[ERROR] ' + e)
+        print('[ERROR] ' + e.__str__)
         return inputTeamResult()
     
 
@@ -101,5 +101,5 @@ def inputRanking():
         return rank_results
 
     except Exception as e:
-        print('[ERROR] ' + e)
+        print('[ERROR] ' + e.__str__)
         return inputRanking()
