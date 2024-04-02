@@ -3,7 +3,8 @@ import pandas as pd
 import requests
 from Scraper import Scraper
 from bs4 import BeautifulSoup
- 
+from datetime import datetime
+
 class GameInfoScraper(Scraper):
     def __init__(self, url):
         super().__init__(url)
@@ -46,7 +47,7 @@ class GameInfoScraper(Scraper):
 
         return home_teams, away_teams, stadiums, schedule_times, game_dates
 
-    def save_to_excel(self):
+    def run(self):
         home_teams, away_teams, stadiums, schedule_times, game_dates = self.scrape_data()
         df = pd.DataFrame({
             "Date" : game_dates,
@@ -56,12 +57,18 @@ class GameInfoScraper(Scraper):
             "Schedule Time": schedule_times
         })
 
-        file_name = f'{game_dates[0].replace("-", ".")}_오늘 경기 일정.xlsx'
-        try:
-            if os.path.exists(file_name):
-                raise FileExistsError(f"파일 '{file_name}'은(는) 이미 존재합니다.")
+        folder_name = 'today_game'
+        if not os.path.exists(folder_name):
+            os.makedirs(folder_name)
 
-            super().save_to_excel(df, file_name)
+        file_name = f'{datetime.now().strftime("%Y.%m.%d")}_오늘 경기 일정.xlsx'
+        file_path = os.path.join(os.getcwd(), folder_name, file_name)
+
+        try:
+            if os.path.exists(file_path):
+                raise FileExistsError(f"파일 '{file_path}'은(는) 이미 존재합니다.")
+
+            super().save_to_excel(df, file_path)
 
         except FileExistsError as e:
             print(f"오류: {e}")
