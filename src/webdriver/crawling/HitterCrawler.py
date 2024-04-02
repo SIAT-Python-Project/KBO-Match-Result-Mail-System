@@ -5,7 +5,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from PlayerCrawler import PlayerCrawler
+from webdriver.crawling.PlayerCrawler import PlayerCrawler
 from domain.Hitter import Hitter
 
 class HitterCrawler(PlayerCrawler):
@@ -16,7 +16,7 @@ class HitterCrawler(PlayerCrawler):
     def of() -> object:
         driver = webdriver.Chrome()
         url = 'https://www.koreabaseball.com/Record/Player/HitterBasic/BasicOld.aspx'
-        tableColNumbers = [3, 4, 8, 11, 12, 13]
+        tableColNumbers = [3, 4, 6, 8, 11, 12, 13]
 
         return HitterCrawler(driver, url, tableColNumbers)
         
