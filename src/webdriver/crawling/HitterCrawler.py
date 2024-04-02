@@ -16,7 +16,7 @@ class HitterCrawler(PlayerCrawler):
     def of() -> object:
         driver = webdriver.Chrome()
         url = 'https://www.koreabaseball.com/Record/Player/HitterBasic/BasicOld.aspx'
-        tableColNumbers = [3, 4, 8, 11, 12, 13]
+        tableColNumbers = [3, 4, 6, 8, 11, 12, 13]
 
         return HitterCrawler(driver, url, tableColNumbers)
         
