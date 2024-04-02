@@ -22,7 +22,6 @@ class KBOController:
             data['ranking_info'][rank] = self.select_rank(rank)
 
         html = to_HTML(data)
-        print(html)
 
         mail.send(html)
 

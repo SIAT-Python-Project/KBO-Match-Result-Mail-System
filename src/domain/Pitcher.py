@@ -21,6 +21,18 @@ class Pitcher:
     def __str__(self) -> str:
         return f'{self.__name}-{self.__team}: {self.__earnedRunsAverage} AVG, {self.__win} win!, {self.__strikeOuts} SO!!'
     
+    def toHTML(self, ranking: int, data) -> str:
+        html = \
+f"""
+    <tr>
+        <td>{ranking}</td>
+        <td>{self.__name}</td>
+        <td>{self.__team}</td>
+        <td>{data}</td>
+    </tr>
+"""
+        return html
+
     def getEarnedRunsAverage(self):
         return self.__earnedRunsAverage if self.__earnedRunsAverage != None else 1
     

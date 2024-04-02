@@ -8,7 +8,7 @@ def to_HTML(data: dict) -> str:
 
     return html
 
-def add_head():
+def add_head() -> str:
     html = '<head>'
 
 
@@ -16,7 +16,7 @@ def add_head():
 
     return html
 
-def add_body(data):
+def add_body(data: dict) -> str:
     html = '<body>'
 
     html += to_HTML_team_info(data['team_info'])
@@ -72,12 +72,81 @@ def to_HTML_player_rank(data: dict) -> str:
     html = '<div id="player-rank">'
     
     html += to_HTML_hitter(hitters)
+    html += to_HTML_pitcher(pitchers)
 
     html += '</div>'
 
     return html
 
-def to_HTML_hitter(data: dict):
+def to_HTML_pitcher(data: dict) -> str:
+    html = '<div>'
+    html += '<div>투수</div>'
+    html += to_HTML_pitcher_AVG(data['AVG'])
+    html += to_HTML_pitcher_S(data['W'])
+    html += to_HTML_pitcher_SO(data['SO'])
+
+    html += '</div>'
+
+    return html
+
+def to_HTML_pitcher_AVG(data) -> str:
+    html = \
+"""
+<div class='table-name'>평균자책점</div>
+<table>
+    <tr>
+        <th>순위</th>
+        <th>이름</th>
+        <th>소속</th>
+        <th>정보</th>
+    <tr>
+"""
+    for i, player in enumerate(data):
+        html += player.toHTML(i+1, player.getEarnedRunsAverage())
+
+    html += '</html>'
+
+    return html
+
+def to_HTML_pitcher_S(data) -> str:
+    html = \
+"""
+<div class='table-name'>승리</div>
+<table>
+    <tr>
+        <th>순위</th>
+        <th>이름</th>
+        <th>소속</th>
+        <th>정보</th>
+    <tr>
+"""
+    for i, player in enumerate(data):
+        html += player.toHTML(i+1, player.getWin())
+
+    html += '</html>'
+
+    return html
+
+def to_HTML_pitcher_SO(data) -> str:
+    html = \
+"""
+<div class='table-name'>삼진</div>
+<table>
+    <tr>
+        <th>순위</th>
+        <th>이름</th>
+        <th>소속</th>
+        <th>정보</th>
+    <tr>
+"""
+    for i, player in enumerate(data):
+        html += player.toHTML(i+1, player.getStrikeOuts())
+
+    html += '</html>'
+
+    return html
+
+def to_HTML_hitter(data: dict) -> str:
     html = '<div>'
     html += '<div>타자</div>'
     html += to_HTML_hitter_AVG(data['AVG'])
