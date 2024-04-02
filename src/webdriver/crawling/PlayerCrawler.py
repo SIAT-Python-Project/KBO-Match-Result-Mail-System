@@ -5,7 +5,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from MyWebDriver import MyWebDriver
+from webdriver.MyWebDriver import MyWebDriver
 from utils.SleepTime import SleepTime
 from selenium.common.exceptions import NoSuchElementException
 
@@ -16,10 +16,12 @@ class PlayerCrawler(MyWebDriver):
 
     def run(self) -> list[object]:
         self.driverOpen()
+        self.clickBtn(By.CSS_SELECTOR, '#cphContents_cphContents_cphContents_udpContent > div.record_result > table > thead > tr > th:nth-child(5) > a')
         self.focus_display()
         players = self.get_player_info()
 
         return players
+
 
     @SleepTime(2)
     def focus_display(self) -> None:
