@@ -18,16 +18,6 @@ def hitter_sort(hitters: list[Hitter], option: str, reverseType: bool=True, coun
     if option == 'RBI':
         return sorted(hitters, key=Hitter.getRunBattedIn, reverse=reverseType)[:count]
     if option == 'SB':
-        return sorted(hitters, key=Hitter.getStolenBase, reverse=reverseType)[:]
+        return sorted(hitters, key=Hitter.getStolenBase, reverse=reverseType)[:count]
     
     return hitters
-
-
-hitterCrawler = HitterCrawler.of()
-data = hitterCrawler.run()
-sort_data = hitter_sort(data, 'SB')
-
-for d in sort_data:
-    print(d)
-
-print(len(sort_data))
