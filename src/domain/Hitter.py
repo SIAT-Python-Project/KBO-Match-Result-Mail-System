@@ -27,6 +27,18 @@ class Hitter:
     def __str__(self) -> str:
         return f'{self.__name}-{self.__team}: {self.__avg} avg, {self.__hit} hit!, {self.__homeRun} Home Run!!'
     
+    def toHTML(self, ranking: int, data) -> str:
+        html = \
+f"""
+    <tr>
+        <td>{ranking}</td>
+        <td>{self.__name}</td>
+        <td>{self.__team}</td>
+        <td>{data}</td>
+    </tr>
+"""
+        return html
+
     def getAvg(self):
         return self.__avg or 0
     

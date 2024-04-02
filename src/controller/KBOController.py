@@ -21,7 +21,10 @@ class KBOController:
         for rank in self.__settings['rank']:
             data['ranking_info'][rank] = self.select_rank(rank)
 
-        return to_HTML(data)
+        html = to_HTML(data)
+        print(html)
+
+        mail.send(html)
 
     def select_result(self, result_type: str) -> list[object]:
         if result_type == 'recent_match_info':
