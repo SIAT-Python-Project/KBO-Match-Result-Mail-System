@@ -68,7 +68,3 @@ class GameInfoScraper(Scraper):
 
         except Exception as e:
             print(f"예외 발생: {e}")
-
-
-info_scraper = GameInfoScraper('https://statiz.sporki.com/')
-info_scraper.save_to_excel()
