@@ -21,3 +21,18 @@ class Hitter:
 
     def __str__(self) -> str:
         return f'{self.__name}-{self.__team}: {self.__hit} hit!, {self.__homeRun} Home Run!!'
+    
+    def getAvg(self):
+        return self.__avg
+    
+    def getHit(self):
+        return self.__hit
+    
+    def getHomeRun(self):
+        return self.__homeRun
+    
+    def getRunBattedIn(self):
+        return self.__runBattedIn
+    
+    def getStolenBase(self):
+        return self.__stolenBase
