@@ -39,7 +39,7 @@ class NewsCrawler(MyWebDriver):
 
     # 어제 날짜 가져오기
     def day(self):
-        yesterday = datetime.date.today() - timedelta(days=2)       # 어제 날짜 가져오기
+        yesterday = datetime.date.today() - timedelta(days=1)       # 어제 날짜 가져오기
         yesterday = yesterday.strftime('%Y.%m.%d')             # 전처리
         return yesterday
 
