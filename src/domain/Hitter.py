@@ -11,7 +11,10 @@ class Hitter:
 
     @staticmethod
     def of(name: str, team: str, avg: float, hit: int, homeRun: int, runBattedIn: int, stolenBase: int) -> object:
-        avg = float(avg)
+        if avg == '-':
+            avg = None
+        else:
+            avg = float(avg)
         hit = int(hit)
         homeRun = int(homeRun)
         runBattedIn = int(runBattedIn)

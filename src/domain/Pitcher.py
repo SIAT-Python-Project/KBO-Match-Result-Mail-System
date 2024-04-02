@@ -8,7 +8,10 @@ class Pitcher:
 
     @staticmethod
     def of(name: str, team: str, earnedRunsAverage: float, win: int, strikeOuts: int):
-        earnedRunsAverage = float(earnedRunsAverage)
+        if earnedRunsAverage == '-':
+            earnedRunsAverage = None
+        else:
+            earnedRunsAverage = float(earnedRunsAverage)
         win = int(win)
         strikeOuts = int(strikeOuts)
 

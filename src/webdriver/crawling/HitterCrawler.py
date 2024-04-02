@@ -5,7 +5,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from PlayerCrawler import PlayerCrawler
+from webdriver.crawling.PlayerCrawler import PlayerCrawler
 from domain.Hitter import Hitter
 
 class HitterCrawler(PlayerCrawler):
