@@ -233,8 +233,7 @@ def to_HTML_team_rank(data: list[object]) -> str:
                     </tr>
 """
     for team in data:
-        pass
-        # html += team.toHTML()
+        html += team.toHTML()
 
     html += '</table>'
     html += '</fieldset>'

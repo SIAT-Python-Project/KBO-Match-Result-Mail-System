@@ -3,6 +3,7 @@ from controller.PlayerController import PlayerController
 from utils.HTMLChanger import to_HTML
 from controller.NewsController import NewsContoller
 from controller.MatchController import MatchController
+from webdriver.crawling.TeamRankCrawler import TeamRankCrawler
 
 class KBOController:
     def __init__(self, settings) -> None:
@@ -37,7 +38,7 @@ class KBOController:
 
     def select_rank(self, rank_type: str) -> list[object]:
         if rank_type == 'team_rank':
-            return []
+            return TeamRankCrawler.of().run()
         if rank_type == 'players_rank':
             return PlayerController.get_ranking_players()
         
