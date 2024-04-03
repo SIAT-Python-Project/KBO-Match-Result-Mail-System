@@ -11,6 +11,60 @@ def to_HTML(data: dict) -> str:
 def add_head() -> str:
     html = '<head>'
 
+    html += \
+"""
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>야구다 야구!</title>
+    <style>
+        .type-label {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .player-rank-table {
+            text-align: center;
+            margin-bottom: 15px;
+            width: 95%;
+        }
+
+        .table-name {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .pitcher-table,
+        .hitter-table {
+            width: 90%;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: black;
+            color: white;
+            font-weight: bold;
+        }
+
+        .pitcher-tables,
+        .hitter-tables {
+            margin-bottom: 20px;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #player-rank {
+            display: flex;
+        }
+    </style>
+"""
 
     html += '</head>'
 
@@ -79,76 +133,82 @@ def to_HTML_player_rank(data: dict) -> str:
     return html
 
 def to_HTML_pitcher(data: dict) -> str:
-    html = '<div>'
-    html += '<div>투수</div>'
+    html = '<fieldset class="pitcher-tables">'
+    html += '<legend class="type-label">투수</legend>'
     html += to_HTML_pitcher_AVG(data['AVG'])
     html += to_HTML_pitcher_S(data['W'])
     html += to_HTML_pitcher_SO(data['SO'])
 
-    html += '</div>'
+    html += '</fieldset>'
 
     return html
 
 def to_HTML_pitcher_AVG(data) -> str:
     html = \
 """
-<div class='table-name'>평균자책점</div>
-<table>
+<div class="pitcher-table">
+<div class="table-name">평균자책점</div>
+<table class="player-rank-table">
     <tr>
         <th>순위</th>
         <th>이름</th>
         <th>소속</th>
         <th>정보</th>
-    <tr>
+    </tr>
 """
     for i, player in enumerate(data):
         html += player.toHTML(i+1, player.getEarnedRunsAverage())
 
-    html += '</html>'
+    html += '</table>'
+    html += '</div>'
 
     return html
 
 def to_HTML_pitcher_S(data) -> str:
     html = \
 """
-<div class='table-name'>승리</div>
-<table>
+<div class="pitcher-table">
+<div class="table-name">승리</div>
+<table class="player-rank-table">
     <tr>
         <th>순위</th>
         <th>이름</th>
         <th>소속</th>
         <th>정보</th>
-    <tr>
+    </tr>
 """
     for i, player in enumerate(data):
         html += player.toHTML(i+1, player.getWin())
 
-    html += '</html>'
+    html += '</table>'
+    html += '</div>'
 
     return html
 
 def to_HTML_pitcher_SO(data) -> str:
     html = \
 """
-<div class='table-name'>삼진</div>
-<table>
+<div class="pitcher-table">
+<div class="table-name">삼진</div>
+<table class="player-rank-table">
     <tr>
         <th>순위</th>
         <th>이름</th>
         <th>소속</th>
         <th>정보</th>
-    <tr>
+    </tr>
 """
     for i, player in enumerate(data):
         html += player.toHTML(i+1, player.getStrikeOuts())
 
-    html += '</html>'
+    html += '</table>'
+    html += '</div>'
 
     return html
 
 def to_HTML_hitter(data: dict) -> str:
-    html = '<div>'
-    html += '<div>타자</div>'
+    html = '<fieldset class="hitter-tables">'
+    html += '<legend class="type-label">타자</legend>'
     html += to_HTML_hitter_AVG(data['AVG'])
     html += to_HTML_hitter_H(data['H'])
     html += to_HTML_hitter_HR(data['HR'])
@@ -156,101 +216,111 @@ def to_HTML_hitter(data: dict) -> str:
     html += to_HTML_hitter_SB(data['SB'])
 
 
-    html += '</div>'
+    html += '</fieldset>'
 
     return html
 
 def to_HTML_hitter_AVG(data) -> str:
     html = \
 """
-<div class='table-name'>타율</div>
-<table>
+<div class="hitter-table">
+<div class="table-name">타율</div>
+<table class="player-rank-table">
     <tr>
         <th>순위</th>
         <th>이름</th>
         <th>소속</th>
         <th>정보</th>
-    <tr>
+    </tr>
 """
     for i, player in enumerate(data):
         html += player.toHTML(i+1, player.getAvg())
 
-    html += '</html>'
+    html += '</table>'
+    html += '</div>'
 
     return html
 
 def to_HTML_hitter_H(data) -> str:
     html = \
 """
-<div class='table-name'>안타</div>
-<table>
+<div class="hitter-table">
+<div class="table-name">안타</div>
+<table class="player-rank-table">
     <tr>
         <th>순위</th>
         <th>이름</th>
         <th>소속</th>
         <th>정보</th>
-    <tr>
+    </tr>
 """
     for i, player in enumerate(data):
         html += player.toHTML(i+1, player.getHit())
 
-    html += '</html>'
+    html += '</table>'
+    html += '</div>'
 
     return html
 
 def to_HTML_hitter_HR(data) -> str:
     html = \
 """
-<div class='table-name'>홈런</div>
-<table>
+<div class="hitter-table">
+<div class="table-name">홈런</div>
+<table class="player-rank-table">
     <tr>
         <th>순위</th>
         <th>이름</th>
         <th>소속</th>
         <th>정보</th>
-    <tr>
+    </tr>
 """
     for i, player in enumerate(data):
         html += player.toHTML(i+1, player.getHomeRun())
 
-    html += '</html>'
+    html += '</table>'
+    html += '</div>'
 
     return html
 
 def to_HTML_hitter_RBI(data) -> str:
     html = \
 """
-<div class='table-name'>타점</div>
-<table>
+<div class="hitter-table">
+<div class="table-name">타점</div>
+<table class="player-rank-table">
     <tr>
         <th>순위</th>
         <th>이름</th>
         <th>소속</th>
         <th>정보</th>
-    <tr>
+    </tr>
 """
     for i, player in enumerate(data):
         html += player.toHTML(i+1, player.getRunBattedIn())
 
-    html += '</html>'
+    html += '</table>'
+    html += '</div>'
 
     return html
 
 def to_HTML_hitter_SB(data) -> str:
     html = \
 """
-<div class='table-name'>주루</div>
-<table>
+<div class="hitter-table">
+<div class="table-name">주루</div>
+<table class="player-rank-table">
     <tr>
         <th>순위</th>
         <th>이름</th>
         <th>소속</th>
         <th>정보</th>
-    <tr>
+    </tr>
 """
     for i, player in enumerate(data):
         html += player.toHTML(i+1, player.getStolenBase())
 
-    html += '</html>'
+    html += '</table>'
+    html += '</div>'
 
     return html
