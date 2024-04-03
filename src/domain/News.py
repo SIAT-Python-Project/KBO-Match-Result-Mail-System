@@ -1,3 +1,5 @@
+import re
+
 class News:
     def __init__(self, teams, news_title, news_link) -> None:
         self.__news_title = news_title,
@@ -6,7 +8,6 @@ class News:
         
     @staticmethod
     def of(teams, news_title, news_link) -> object:
-        
         return News(teams, news_title, news_link)
     
     def __str__(self) -> str:
@@ -15,7 +16,7 @@ class News:
     def toHTML(self):
         html = \
 f"""
-    <a href="{self.__news_link}">{self.__news_title}</a>
+    <a href="{self.__news_link[0]}">{self.__news_title[0]}</a>
 """
 
         return html

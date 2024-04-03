@@ -35,8 +35,14 @@ class Mail:
         msg['To'] = self.__email
         msg['Subject'] = '야구!'
 
-        msg_html = MIMEText(html, 'html', _charset='UTF-8')
-        msg.attach(msg_html)
+        file_name = './IO/baseball_info.html'
+        with open(file_name, 'w', encoding='UTF-8') as f:
+            f.write(html)
+        
+        with open(file_name, 'rb') as f:
+            tranfer_file = MIMEApplication(f.read())
+            tranfer_file.add_header('Content-Disposition', 'attachment', fileName='baseball_info.html')
+            msg.attach(tranfer_file)
 
         smtp = smtplib.SMTP_SSL(self.SMTP_SERVER, self.SMTP_PORT)
         smtp.login(self.__email, self.__passwd)
