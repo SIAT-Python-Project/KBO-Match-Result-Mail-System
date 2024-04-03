@@ -127,6 +127,8 @@ def to_HTML_team_info(data: dict) -> str:
     if 'recent_match_news' in data:
         html += to_HTML_recent_match_news(data['recent_match_news'])
 
+    html += '</div>'
+
     return html
 
 def to_HTML_recent_match(data: list[object]) -> str:
@@ -200,7 +202,7 @@ def to_HTML_recent_match_news(data: dict) -> str:
     
 def to_HTML_rank(data: dict) -> str:
 
-    html = '<div id="rank">'
+    html = '<div id="rank" class="container">'
 
     if 'team_rank' in data:
         html += to_HTML_team_rank(data['team_rank'])
@@ -233,8 +235,7 @@ def to_HTML_team_rank(data: list[object]) -> str:
                     </tr>
 """
     for team in data:
-        pass
-        # html += team.toHTML()
+        html += team.toHTML()
 
     html += '</table>'
     html += '</fieldset>'

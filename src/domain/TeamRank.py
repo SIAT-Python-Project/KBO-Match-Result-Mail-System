@@ -7,3 +7,13 @@ class TeamRank:
     
     def __str__(self) -> str:
         return f'팀순위: {self.__team_rank_list}'
+    
+    def toHTML(self) -> str:
+        html = '<tr>'
+
+        for data in self.__team_rank_list[0].split(' ')[:10]:
+            html += f'<td>{data}</td>'
+
+        html += '</tr>'
+
+        return html
