@@ -13,11 +13,12 @@ from datetime import timedelta
 class NewsCrawler(MyWebDriver):
     def __init__(self, driver: webdriver.Chrome, url: str) -> None:
         super().__init__(driver, url)
+        
     
     @staticmethod
-    def of(url: str) -> object:
+    def of() -> object:
         driver = webdriver.Chrome()
-        url = "https://www.koreabaseball.com/MediaNews/News/BreakingNews/List.aspx"   
+        url = "https://www.koreabaseball.com/MediaNews/News/BreakingNews/List.aspx"
         return NewsCrawler(driver, url)
     
     def run(self):
@@ -31,6 +32,7 @@ class NewsCrawler(MyWebDriver):
         self.news_date_element = self._driver.find_elements(By.CLASS_NAME,'date')       # 발행날짜
         self.news_title_element = self._driver.find_elements(By.CSS_SELECTOR,'.txt strong') # 제목
         self.news_link_element = self._driver.find_elements(By.CSS_SELECTOR,'.txt strong a')    # 뉴스 링크
+        
         return self.content_text()
          
 
@@ -45,17 +47,16 @@ class NewsCrawler(MyWebDriver):
     def content_text(self) -> list[object]:
         self.news_title = []
         self.news_title_link = []
-         
-        if self.day() == self.news_date_element[0].text:
-            for i in range(0,len(self.news_date_element)):
-                if self.day() == self.news_date_element[i].text:
+        
+        team_name = input("구단을 입력하세요")
+        
+        for i in range(0,len(self.news_date_element)):
+            if self.day() == self.news_date_element[i].text:
+                if team_name in self.news_title_element[i].text:
                     self.news_title.append(self.news_title_element[i].text)
                     self.news_title_link.append(self.news_link_element[i].get_attribute('href'))
-                    
-                elif self.day() != self.news_date_element[i].text:
-                    break
-                
-                else:
-                    self.news_title = '전날 경기가 없었습니다'
-                    break
+       
         return self.news_title, self.news_title_link
+    
+        
+    
