@@ -181,7 +181,7 @@ def to_HTML_recent_match_news(data: dict) -> str:
             <legend class="type-label">팀 뉴스</legend>
             <ul>
 """
-    for key in data.keys():
+    for key in data:
         html += '<li>'
         html += f'<div class="li-name">{key}</div>'
 
