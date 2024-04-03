@@ -4,6 +4,8 @@ import requests
 from Scraper import Scraper
 from bs4 import BeautifulSoup
 from datetime import datetime
+from domain.Y_Game import Y_Game
+from typing import List
 
 class GameResultsScraper(Scraper):
     def __init__(self, url):
@@ -33,10 +35,8 @@ class GameResultsScraper(Scraper):
                 game_results.append([game_date, team_1_name, team_1_score, team_2_name, team_2_score])
 
         return game_results
-
-    def run(self, file_name_prefix='경기기록'):
-        game_results = self.scrape_data()
-        
+    
+    def create_excel_file(self, game_results, file_name_prefix='경기기록'):
         game_date = game_results[0][0]
         game_year = datetime.now().year
         full_game_date = f'{game_year}.{game_date}'
@@ -62,6 +62,10 @@ class GameResultsScraper(Scraper):
             print(f"예외 발생: {e}")
 
         return file_path
-
+    
     def save_to_excel(self, df, file_name):
         super().save_to_excel(df, file_name)
+        
+    def run(self) -> List[Y_Game]:
+        game_results = self.scrape_data()
+        return Y_Game.create_games_from_results(game_results)
