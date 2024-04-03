@@ -14,7 +14,7 @@ class TeamRankCrawler(MyWebDriver):
         
 
     @staticmethod
-    def of(url: str) -> object:
+    def of() -> object:
         driver = webdriver.Chrome()
         url = "https://www.koreabaseball.com/Record/TeamRank/TeamRankDaily.aspx"   
         return TeamRankCrawler(driver, url)
@@ -36,11 +36,11 @@ class TeamRankCrawler(MyWebDriver):
 
         # 목차(전체)
         team_head = self._driver.find_element(By.CSS_SELECTOR, '.tData thead tr')    
-        team_rank_list.append(team_head)
+        team_rank_list.append(team_head.text)
 
         # 팀 순위 가져오기
         for i in range(1,11):
-            team_rank = self._driver.find_elements(By.CSS_SELECTOR, '.mb25 + .tData tbody tr:nth-child('+str(i)+')') 
-            team_rank_list += team_rank
+            team_rank = self._driver.find_elements(By.CSS_SELECTOR, '.mb25 + .tData tbody tr:nth-child('+str(i)+')')
+            team_rank_list += [rank_team.text for rank_team in team_rank]
 
         return team_rank_list
