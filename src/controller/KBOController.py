@@ -2,6 +2,7 @@ from utils.Mail import Mail
 from controller.PlayerController import PlayerController
 from utils.HTMLChanger import to_HTML
 from controller.NewsController import NewsContoller
+from controller.MatchController import MatchController
 
 class KBOController:
     def __init__(self, settings) -> None:
@@ -28,9 +29,9 @@ class KBOController:
 
     def select_result(self, result_type: str) -> list[object]:
         if result_type == 'recent_match_info':
-            return []
+            return MatchController.get_recent_match_info()
         if result_type == 'today_match_info':
-            return []
+            return MatchController.get_next_match_info()
         if result_type == 'recent_match_news':
             return NewsContoller.get_team_news(self.__settings['team']['teams'])
 

@@ -143,8 +143,7 @@ def to_HTML_recent_match(data: list[object]) -> str:
                     </tr>
 """
     for match in data:
-        pass
-        # html += match.toHTML()
+        html += match.toHTML()
 
     html += '</table>'
     html += '</div>'
@@ -166,8 +165,7 @@ def to_HTML_today_match(data: list[object]) -> str:
                     </tr>
 """
     for match in data:
-        pass
-        # html += match.toHTML()
+        html += match.toHTML()
 
     html += '</table>'
     html += '</div>'

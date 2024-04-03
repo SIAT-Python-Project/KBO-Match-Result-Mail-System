@@ -20,6 +20,19 @@ class T_Game:
     def __str__(self) -> str:
         return f'{self.__date}: {self.__home_team} vs {self.__away_team} at {self.__stadium}, {self.__schedule_time}'
 
+    def toHTML(self):
+        html = \
+f"""
+    <tr>
+        <td>{self.__game_date}</td>
+        <td>{self.__home_team}</td>
+        <td>{self.__away_team}</td>
+        <td>{self.__stadium}</td>
+        <td>{self.__schedule_time}</td>
+    </tr>
+"""
+        return html
+
     def get_home_team(self):
         return self.__home_team
 
