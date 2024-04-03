@@ -31,9 +31,14 @@ def add_head() -> str:
             width: 95%;
         }
 
-        .table-name {
+        .table-name,
+        .li-name {
             font-size: 17px;
             font-weight: bold;
+        }
+
+        a {
+            text-decoration: none;
         }
 
         .pitcher-table,
@@ -138,8 +143,7 @@ def to_HTML_recent_match(data: list[object]) -> str:
                     </tr>
 """
     for match in data:
-        pass
-        # html += match.toHTML()
+        html += match.toHTML()
 
     html += '</table>'
     html += '</div>'
@@ -161,18 +165,41 @@ def to_HTML_today_match(data: list[object]) -> str:
                     </tr>
 """
     for match in data:
-        pass
-        # html += match.toHTML()
+        html += match.toHTML()
 
     html += '</table>'
     html += '</div>'
 
     return html
 
-def to_HTML_recent_match_news(data: list[object]) -> str:
-    return ''
+def to_HTML_recent_match_news(data: dict) -> str:
+    html = \
+"""
+        <fieldset class="team-news">
+            <legend class="type-label">팀 뉴스</legend>
+            <ul>
+"""
+    for key in data:
+        html += '<li>'
+        html += f'<div class="li-name">{key}</div>'
+
+        if len(data[key]) > 0:
+            html += '<ul>'
+
+            for news in data[key]:
+                html += news.toHTML()
+
+            html += '</ul>'
+            
+        html += '</li>'
+
+    html += '</ul>'
+    html += '</fieldset>'
+
+    return html
     
 def to_HTML_rank(data: dict) -> str:
+
     html = '<div id="rank">'
 
     if 'team_rank' in data:

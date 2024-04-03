@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import requests
-from Scraper import Scraper
+from webdriver.crawling.Scraper import Scraper
 from bs4 import BeautifulSoup
 from datetime import datetime
 from domain.Y_Game import Y_Game

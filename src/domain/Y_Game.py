@@ -15,13 +15,25 @@ class Y_Game:
     def create_games_from_results(cls, game_results: list):
         games = []
         for game_result in game_results:
-            game_date, team_1_name, team_1_score, team_2_name, team_2_score = game_result
+            game_date, team_1_name, team_1_score, team_2_score, team_2_name = game_result
             games.append(cls(game_date, team_1_name, int(team_1_score), team_2_name, int(team_2_score)))
         return games
 
     def __str__(self) -> str:
         return f'{self.__game_date}: {self.__team_1_name} {self.__team_1_score} vs {self.__team_2_score} {self.__team_2_name}'
     
+    def toHTML(self):
+        html = \
+f"""
+    <tr>
+        <td>{self.__game_date}</td>
+        <td>{self.__team_1_name}</td>
+        <td>{self.__team_1_score}:{self.__team_2_score}</td>
+        <td>{self.__team_2_name}</td>
+    </tr>
+"""
+        return html
+
     def get_game_date(self):
         return self.__game_date
 

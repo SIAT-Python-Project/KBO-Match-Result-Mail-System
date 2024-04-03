@@ -54,7 +54,7 @@ class NewsCrawler(MyWebDriver):
                     if team_list in self.news_title_element[i].text:
                         news_title = self.news_title_element[i].text
                         news_link = self.news_link_element[i].get_attribute('href')
-                        news_list.append(News.of(self.teams, news_title, news_link))
+                        news_list.append(News.of(team_list, news_title, news_link))
        
        
         return news_list
