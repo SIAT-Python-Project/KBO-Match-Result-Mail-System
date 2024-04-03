@@ -22,7 +22,10 @@ def add_head() -> str:
             font-weight: bold;
         }
 
-        .player-rank-table {
+        .player-rank-table,
+        .team-rank-table,
+        .recent-match-table,
+        .next-match-table {
             text-align: center;
             margin-bottom: 15px;
             width: 95%;
@@ -34,8 +37,10 @@ def add_head() -> str:
         }
 
         .pitcher-table,
-        .hitter-table {
-            width: 90%;
+        .hitter-table,
+        .team-rank-table,
+        .match {
+            width: 95%;
         }
 
         table,
@@ -63,6 +68,24 @@ def add_head() -> str:
         #player-rank {
             display: flex;
         }
+
+        .container {
+            flex-grow: 1;
+        }
+
+        body {
+            display: flex;
+        }
+
+
+        .match-info {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .match {
+            flex-grow: 1;
+        }
     </style>
 """
 
@@ -82,12 +105,19 @@ def add_body(data: dict) -> str:
     return html
 
 def to_HTML_team_info(data: dict) -> str:
-    html = ''
-    if 'recent_match_info' in data:
-        html += to_HTML_recent_match(data['recent_match_info'])
+    html = '<div id="info" class="container">'
 
-    if 'today_match_info' in data:
-        html += to_HTML_today_match(data['today_match_info'])
+    if 'recent_match_info' in data or 'today_match_info' in data:
+        html += '<fieldset class="match-info">'
+        html += '<legend class="type-label">경기 결과</legend>'
+
+        if 'recent_match_info' in data:
+            html += to_HTML_recent_match(data['recent_match_info'])
+
+        if 'today_match_info' in data:
+            html += to_HTML_today_match(data['today_match_info'])
+
+        html += '</fieldset>'
     
     if 'recent_match_news' in data:
         html += to_HTML_recent_match_news(data['recent_match_news'])
@@ -95,10 +125,49 @@ def to_HTML_team_info(data: dict) -> str:
     return html
 
 def to_HTML_recent_match(data: list[object]) -> str:
-    return ''
+    html = \
+"""
+            <div class="match recent-match">
+                <div class="table-name">최근 경기</div>
+                <table class="recent-match-table">
+                    <tr>
+                        <th>날짜</th>
+                        <th>팀1</th>
+                        <th>결과</th>
+                        <th>팀2</th>
+                    </tr>
+"""
+    for match in data:
+        pass
+        # html += match.toHTML()
+
+    html += '</table>'
+    html += '</div>'
+
+    return html
 
 def to_HTML_today_match(data: list[object]) -> str:
-    return ''
+    html = \
+"""
+            <div class="match next-match">
+                <div class="table-name">다음 경기</div>
+                <table class="next-match-table">
+                    <tr>
+                        <th>날짜</th>
+                        <th>팀1</th>
+                        <th>팀2</th>
+                        <th>구장</th>
+                        <th>시작시간</th>
+                    </tr>
+"""
+    for match in data:
+        pass
+        # html += match.toHTML()
+
+    html += '</table>'
+    html += '</div>'
+
+    return html
 
 def to_HTML_recent_match_news(data: list[object]) -> str:
     return ''
@@ -117,7 +186,34 @@ def to_HTML_rank(data: dict) -> str:
     return html
 
 def to_HTML_team_rank(data: list[object]) -> str:
-    return ''
+    html = \
+"""
+        <div id="team-rank">
+            <fieldset class="team-table">
+                <legend class="type-label">팀 순위</legend>
+                <table class="team-rank-table">
+                    <tr>
+                        <th>순위</th>
+                        <th>팀명</th>
+                        <th>경기</th>
+                        <th>승</th>
+                        <th>패</th>
+                        <th>무</th>
+                        <th>승률</th>
+                        <th>게임차</th>
+                        <th>최근10경기</th>
+                        <th>연속</th>
+                    </tr>
+"""
+    for team in data:
+        pass
+        # html += team.toHTML()
+
+    html += '</table>'
+    html += '</fieldset>'
+    html += '</div>'
+
+    return html
 
 def to_HTML_player_rank(data: dict) -> str:
     hitters = data['hitter']
