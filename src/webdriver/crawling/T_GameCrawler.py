@@ -4,6 +4,8 @@ import requests
 from Scraper import Scraper
 from bs4 import BeautifulSoup
 from datetime import datetime
+from domain.T_Game import T_Game
+from typing import List
 
 class GameInfoScraper(Scraper):
     def __init__(self, url):
@@ -46,9 +48,8 @@ class GameInfoScraper(Scraper):
             stadiums.append(stadium)
 
         return home_teams, away_teams, stadiums, schedule_times, game_dates
-
-    def run(self):
-        home_teams, away_teams, stadiums, schedule_times, game_dates = self.scrape_data()
+    
+    def create_excel_file(self, home_teams, away_teams, stadiums, schedule_times, game_dates):
         df = pd.DataFrame({
             "Date" : game_dates,
             "Home Team": home_teams,
@@ -75,3 +76,7 @@ class GameInfoScraper(Scraper):
 
         except Exception as e:
             print(f"예외 발생: {e}")
+
+    def run(self) -> List[T_Game]:
+        home_teams, away_teams, stadiums, schedule_times, game_dates = self.scrape_data()
+        return T_Game.create_games(home_teams, away_teams, stadiums, schedule_times, game_dates)
