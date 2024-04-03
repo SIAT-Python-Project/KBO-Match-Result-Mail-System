@@ -9,17 +9,18 @@ from MyWebDriver import MyWebDriver
 from utils.SleepTime import SleepTime
 import datetime
 from datetime import timedelta
+from domain.News import News
 
 class NewsCrawler(MyWebDriver):
-    def __init__(self, driver: webdriver.Chrome, url: str) -> None:
+    def __init__(self, driver: webdriver.Chrome, url: str, teams:list[str]) -> None:
         super().__init__(driver, url)
-        
+        self.teams = teams
     
     @staticmethod
-    def of() -> object:
+    def of(teams) -> object:
         driver = webdriver.Chrome()
         url = "https://www.koreabaseball.com/MediaNews/News/BreakingNews/List.aspx"
-        return NewsCrawler(driver, url)
+        return NewsCrawler(driver, url, teams)
     
     def run(self):
         self.driverOpen()
@@ -44,19 +45,17 @@ class NewsCrawler(MyWebDriver):
 
     
     # 뉴스 타이틀, 링크 가져오기
-    def content_text(self) -> list[object]:
-        self.news_title = []
-        self.news_title_link = []
-        
-        team_name = input("구단을 입력하세요")
+    def content_text(self) -> News:
+        news_list = []
         
         for i in range(0,len(self.news_date_element)):
             if self.day() == self.news_date_element[i].text:
-                if team_name in self.news_title_element[i].text:
-                    self.news_title.append(self.news_title_element[i].text)
-                    self.news_title_link.append(self.news_link_element[i].get_attribute('href'))
+                for team_list in self.teams:
+                    if team_list in self.news_title_element[i].text:
+                        news_title = self.news_title_element[i].text
+                        news_link = self.news_link_element[i].get_attribute('href')
+                        news_list.append(News.of(self.teams, news_title, news_link))
        
-        return self.news_title, self.news_title_link
-    
-        
+       
+        return news_list
     
