@@ -31,9 +31,14 @@ def add_head() -> str:
             width: 95%;
         }
 
-        .table-name {
+        .table-name,
+        .li-name {
             font-size: 17px;
             font-weight: bold;
+        }
+
+        a {
+            text-decoration: none;
         }
 
         .pitcher-table,
