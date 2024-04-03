@@ -33,14 +33,14 @@ class TeamRankCrawler(MyWebDriver):
         
     def get_rank_list(self) -> list[object]:
         team_rank_list = []
-        
+
         # 목차(전체)
         team_head = self._driver.find_element(By.CSS_SELECTOR, '.tData thead tr')    
         team_rank_list.append(team_head)
-        
+
         # 팀 순위 가져오기
         for i in range(1,11):
             team_rank = self._driver.find_elements(By.CSS_SELECTOR, '.mb25 + .tData tbody tr:nth-child('+str(i)+')') 
             team_rank_list += team_rank
-        return team_rank_list
 
+        return team_rank_list

@@ -22,15 +22,12 @@ class NewsCrawler(MyWebDriver):
     
     def run(self):
         self.driverOpen()
-        self.newsList()
+        return_news_list = self.news_crawling()
+        return return_news_list
     
-    @SleepTime(2)
-    def newsList(self):
-        self.news_crawling()
+    @SleepTime(2)    
         
-        
-        
-    def news_crawling(self):       
+    def news_crawling(self) -> list[object]:       
         self.news_date_element = self._driver.find_elements(By.CLASS_NAME,'date')       # 발행날짜
         self.news_title_element = self._driver.find_elements(By.CSS_SELECTOR,'.txt strong') # 제목
         self.news_link_element = self._driver.find_elements(By.CSS_SELECTOR,'.txt strong a')    # 뉴스 링크
@@ -45,7 +42,7 @@ class NewsCrawler(MyWebDriver):
 
     
     # 뉴스 타이틀, 링크 가져오기
-    def content_text(self):
+    def content_text(self) -> list[object]:
         self.news_title = []
         self.news_title_link = []
          
@@ -54,11 +51,11 @@ class NewsCrawler(MyWebDriver):
                 if self.day() == self.news_date_element[i].text:
                     self.news_title.append(self.news_title_element[i].text)
                     self.news_title_link.append(self.news_link_element[i].get_attribute('href'))
-                else:
+                    
+                elif self.day() != self.news_date_element[i].text:
                     break
-        else:
-            self.news_title = '전날 경기가 없었습니다'
-
                 
-    
-NewsCrawler(webdriver.Chrome(),"https://www.koreabaseball.com/MediaNews/News/BreakingNews/List.aspx").run()
+                else:
+                    self.news_title = '전날 경기가 없었습니다'
+                    break
+        return self.news_title, self.news_title_link
