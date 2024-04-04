@@ -88,7 +88,13 @@ pip install requests
 pip install bs4
 pip install schedule
   ```
-3. Run main.py
+3. Setting
+  ```sh
+  cd ./KBO-Match-Result-Mail-System
+  mkdir ./IO
+  ```
+
+4. Run main.py
   ```sh
 python ./src/main.py
   ```
@@ -146,7 +152,7 @@ Don't forget to give the project a star! Thanks again!
 - [ ] Saving match info by date
 - [ ] Saving team / player rank
 - [ ] Changing input environment GUI from Terminal
-- [ ] Searching player inho
+- [ ] Searching player info
 
 <p align="right">(<a href="#kbo-match-result-mail-system-yellow_heart">back to top</a>)</p>
 
