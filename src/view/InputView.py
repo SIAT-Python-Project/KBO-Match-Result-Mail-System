@@ -23,7 +23,7 @@ def inputMail():
 
     try:
         mail = Mail(email, passwd)
-        mail.send_test()
+        mail.validate_login()
         return {"email": email, "passwd": passwd}
     except Exception as e:
         print(f'[ERROR] {e}')
