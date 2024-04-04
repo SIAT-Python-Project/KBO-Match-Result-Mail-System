@@ -1,7 +1,7 @@
 from utils.Mail import Mail
 
 kbo_teams = ['NC', 'SSG', '롯데', '삼성', '키움', '두산', 'LG', '한화', 'KT', 'KIA']
-team_result_info = {'1': 'recent_match_info', '2': 'today_match_info', '3': 'recent_match_news'}
+team_result_info = {'1': 'recent_match_info', '2': 'today_match_info', '3': 'my_team_info'}
 rank_info = {'1': 'team_rank', '2': 'players_rank'}
 
 
