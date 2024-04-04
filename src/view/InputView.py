@@ -15,11 +15,11 @@ def inputSettingValue():
 
 def inputMail():
     print('------------------------------')
-    print("받으실 메일을 적어주십시요.")
-    email = input('>>>')
+    print("받으실 메일을 적어주세요.")
+    email = input('>>> ')
     print('------------------------------')
-    print("받으실 메일의 비밀번호를 적어주십시요.")
-    passwd = input('>>>')
+    print("받으실 메일의 비밀번호를 적어주세요.")
+    passwd = input('>>> ')
 
     try:
         mail = Mail(email, passwd)
@@ -43,7 +43,7 @@ def inputTeamName():
         print(team)
     print('원하는 구단들을 ,기준으로 입력해주세요.')
     print('ex) NC,KT,한화')
-    teams = set(input(">>>").split(','))
+    teams = set(input(">>> ").split(','))
     try:
         for team in teams:
             if team not in kbo_teams:
@@ -56,13 +56,13 @@ def inputTeamName():
     
 def inputTeamResult():
     print('------------------------------')
-    print('1. 최근 경기 기록 및 박스 스코어')
+    print('1. 최근 경기 기록')
     print('2. 오늘 경기 일정')
-    print('3. 최근 경기 뉴스')
+    print('3. 원하는 팀의 최근 경기 뉴스 및 박스 스코어')
     print('받고 싶은 정보를 ,기준으로 입력해주세요.')
     print('ex) 1,2')
 
-    team_input = input('>>>')
+    team_input = input('>>> ')
 
     results = set(team_input.split(','))
 
@@ -92,7 +92,7 @@ def inputRanking():
     print('받고 싶은 정보를 ,기준으로 입력해주세요.')
     print('ex) 1,2')
 
-    ranking_input = input('>>>')
+    ranking_input = input('>>> ')
 
     results = set(ranking_input.split(','))
 

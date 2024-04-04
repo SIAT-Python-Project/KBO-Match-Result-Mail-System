@@ -126,7 +126,7 @@ def to_HTML_team_info(data: dict) -> str:
 
         html += '</fieldset>'
     
-    if len(data['my_team_info']) > 0:
+    if 'my_team_info' in data and len(data['my_team_info']) > 0:
         html += to_HTML_team_infos(data['my_team_info'])
 
     html += '</div>'
