@@ -25,7 +25,8 @@ def add_head() -> str:
         .player-rank-table,
         .team-rank-table,
         .recent-match-table,
-        .next-match-table {
+        .next-match-table,
+        .team-match-table {
             text-align: center;
             margin-bottom: 15px;
             width: 95%;
@@ -44,6 +45,7 @@ def add_head() -> str:
         .pitcher-table,
         .hitter-table,
         .team-rank-table,
+        .team-match-table
         .match {
             width: 95%;
         }
@@ -124,8 +126,8 @@ def to_HTML_team_info(data: dict) -> str:
 
         html += '</fieldset>'
     
-    if 'recent_match_news' in data:
-        html += to_HTML_recent_match_news(data['recent_match_news'])
+    if len(data['my_team_info']) > 0:
+        html += to_HTML_team_infos(data['my_team_info'])
 
     html += '</div>'
 
@@ -174,10 +176,10 @@ def to_HTML_today_match(data: list[object]) -> str:
 
     return html
 
-def to_HTML_recent_match_news(data: dict) -> str:
+def to_HTML_team_infos(data: dict) -> str:
     html = \
 """
-        <fieldset class="team-news">
+        <fieldset class="team-info">
             <legend class="type-label">팀 뉴스</legend>
             <ul>
 """
@@ -185,10 +187,38 @@ def to_HTML_recent_match_news(data: dict) -> str:
         html += '<li>'
         html += f'<div class="li-name">{key}</div>'
 
-        if len(data[key]) > 0:
+        if 'team_score' in data[key]:
+            html += \
+"""
+                    <table class="team-match-table">
+                        <tr>
+                            <th>TEAM</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <th>7</th>
+                            <th>8</th>
+                            <th>9</th>
+                            <th>10</th>
+                            <th>11</th>
+                            <th>12</th>
+                            <th>R</th>
+                            <th>H</th>
+                            <th>E</th>
+                            <th>B</th>
+                        </tr>
+"""
+            html += data[key]['team_score'].toHTML()
+            html += '</table>'
+
+
+        if len(data[key]['team_news']) > 0:
             html += '<ul>'
 
-            for news in data[key]:
+            for news in data[key]['team_news']:
                 html += news.toHTML()
 
             html += '</ul>'

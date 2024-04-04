@@ -37,7 +37,6 @@ class Boxscore(MyWebDriver):
         
         game_result = []
         for i in range(0,len(inning),3):
-            game_result.append(inning[i:i+3])
+            game_result.append(GameResult(inning[i:i+3]))
 
         return game_result    
-
